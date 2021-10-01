@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "MLc+g7elw0bj6HRKe/FVZWZze7mm+1DrtcLuXze/kkNPPKYt8KM/vOxYsi9Dy4nPyZ3BN+rKyVo6uNLspHkbkg==",
+  "success": true,
+  "projectFilePath": "/Users/batuhanyigit/Documents/C#/LD49/Game/Game.csproj",
+  "expectedPackageFiles": [
+    "/Users/batuhanyigit/.nuget/packages/raylib-cs/3.7.0/raylib-cs.3.7.0.nupkg.sha512",
+    "/Users/batuhanyigit/.nuget/packages/system.numerics.vectors/4.5.0/system.numerics.vectors.4.5.0.nupkg.sha512"
+  ],
+  "logs": []
+}
