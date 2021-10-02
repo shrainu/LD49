@@ -16,17 +16,17 @@ namespace Game {
 
         public void Events() {
             for (int i = 0; i < entities.Count; i++) {
-                entities[i].Events();
+                if (entities[i].active) entities[i].Events();
         }
             }
         public void Update() {
             for (int i = 0; i < entities.Count; i++) {
-                entities[i].Update();
+                if (entities[i].active) entities[i].Update();
             }
         }
         public void Render() {
             for (int i = 0; i < entities.Count; i++) {
-                entities[i].Render();
+                if (entities[i].active && entities[i].render) entities[i].Render();
             }
         }
 

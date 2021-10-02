@@ -19,6 +19,8 @@ namespace Game {
             this.name = name;
             this.transform = transform;
             this.Tag = tag;
+            active = true;
+            render = true;
         }
 
         public abstract void Events();
