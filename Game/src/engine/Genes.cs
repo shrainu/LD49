@@ -10,9 +10,9 @@ namespace Game
     public class Genes
     {
         public const int Number = 6;
-        const double _default = 0;
+        protected const double _default = 0;
 
-        double[] values = new double[Number];
+        protected double[] values = new double[Number];
         public double this[int i]
         {
             get { return values[i]; }
