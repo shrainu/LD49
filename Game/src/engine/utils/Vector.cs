@@ -4,7 +4,7 @@ namespace Game {
 
     public class Vector2
     {
-        float x, y;
+        public float x, y;
 
         public Vector2(float x, float y) { this.x = x; this.y = y; }
 
@@ -28,7 +28,7 @@ namespace Game {
 
     public class Vector3
     {
-        float x, y, z;
+        public float x, y, z;
 
         public Vector3(float x, float y, float z) { this.x = x; this.y = y; this.z = z; }
 

@@ -2,6 +2,6 @@
  A game made for Ludum Dare #49 in C# using Raylib.
 
  Team :
- * shrain - Head Programmer
+ * shrain - Programming
  * boggy - Game Design, Programming, Art
- * lolchicer - Something? 
+ * lolchicer - Programming 

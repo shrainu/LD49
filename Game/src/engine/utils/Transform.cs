@@ -1,7 +1,9 @@
+using Raylib_cs;
+
 
 namespace Game {
 
-    class Transform {
+    public class Transform {
 
         // Properties
         public Vector2 position;
