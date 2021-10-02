@@ -61,8 +61,6 @@ namespace Game {
 
             // Render the Current Scene
             sceneManager.Render();
-
-            Raylib.DrawText("Its working!", 12, 12, 20, Color.GREEN);
             
             // Finish the render process
             Raylib.EndDrawing();

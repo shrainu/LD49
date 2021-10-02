@@ -12,18 +12,22 @@ uniform vec4 colDiffuse;
 out vec4 finalColor;
 
 // NOTE: Add here your custom variables
-uniform vec4 u_Color;
+uniform vec4 u_ColorR;
+uniform vec4 u_ColorG;
 
 void main()
 {
     // Texel color fetching from texture sampler
     vec4 texelColor = texture(texture0, fragTexCoord);
-    
+
     // NOTE: Implement here your fragment shader code
     if (texelColor == vec4(1.0f, 0.0f, 0.0f, 1.0f)) {
-        finalColor = u_Color;
+        finalColor = u_ColorR;
+    }
+    else if (texelColor == vec4(0.0f, 1.0f, 0.0f, 1.0f)) {
+        finalColor = u_ColorG;
     }
     else {
-        finalColor = texelColor; // colDiffuse
+        discard;
     }
-}
+} // colDiffuse

@@ -37,7 +37,7 @@ namespace Game {
 
             // Load Image to the RAM
             Image temp = Raylib.LoadImage(imagePath);
-            // Create a texture from Image data
+            // Create a texture from Image data which is loaded to VRAM
             sprite = Raylib.LoadTextureFromImage(temp);
             // Unload the image from RAM
             Raylib.UnloadImage(temp);
