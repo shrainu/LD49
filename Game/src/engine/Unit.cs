@@ -8,7 +8,7 @@ namespace Game
 {
     public abstract class Unit : Entity
     {
-        List<Spell> spells;
+        List<Spell> spells = new();
         public Spell this[int i]
         {
             get { return spells[i]; }
