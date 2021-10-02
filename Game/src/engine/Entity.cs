@@ -33,6 +33,8 @@ namespace Game {
         public abstract void Update();
         public abstract void Render();
 
+        public virtual void ActTurn() {}
+
         public virtual void SetSprite(string imagePath) {
 
             // Load Image to the RAM

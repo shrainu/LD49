@@ -61,6 +61,18 @@ namespace Game {
         }
 
 
+        public void ActTileTurns() {
+
+            for (int x = 0; x < width; x++) {
+
+                for (int y = 0; y < height; y++) {
+
+                    tiles[x, y].ActTurn();
+                }
+            }
+        }
+
+
         private void LoadTileset(string filepath) {
 
             // Load Image to the RAM

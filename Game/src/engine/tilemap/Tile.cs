@@ -29,5 +29,7 @@ namespace Game {
                                 new System.Numerics.Vector2(position.x * tileSize, position.y * tileSize), Color.WHITE);
             RGBShader.Instance.Unbind();
         }
+
+        public virtual void ActTurn() {}
     }
 }

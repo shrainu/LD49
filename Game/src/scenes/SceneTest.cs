@@ -8,6 +8,9 @@ namespace Game {
         // Entity Manager
         EntityManager entityManager;
 
+        // Turn Manager
+        TurnManager turnManager;
+
         // Tilemap
         Tilemap tilemap;
 
@@ -16,13 +19,18 @@ namespace Game {
             // Initialize Tilemap
             tilemap = new Tilemap(16, 16, 16, "res/test_tileset.png");
 
+            // Initialize Turn Manager
+            turnManager = new TurnManager(tilemap);
+
             // Initialize Entity Manager
             entityManager = new EntityManager();
 
             // Create and add entities to the Entity Manager
-            EntityTest t = new EntityTest(new Transform(400, 400, 80, 80), new Color(123, 50, 255, 255));
+            EntityTest t = new EntityTest(new Transform(400, 400, 40, 40), new Color(123, 50, 255, 255));
             t.SetSprite("res/example.png");
             entityManager.AddEntity(t);
+            Player p = new Player(new Transform(0, 0, 80, 80), turnManager);
+            entityManager.AddEntity(p);
         }
 
 
@@ -41,6 +49,7 @@ namespace Game {
         }
         public override void Render() {
 
+            // Clean Background
             Raylib.ClearBackground(Color.BLACK);
 
             // Render Tilemap
