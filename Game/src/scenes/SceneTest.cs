@@ -20,7 +20,7 @@ namespace Game {
             entityManager = new EntityManager();
 
             // Create and add entities to the Entity Manager
-            EntityTest t = new EntityTest(new Transform(100, 100, 50, 50), new Color(123, 50, 255, 255));
+            EntityTest t = new EntityTest(new Transform(400, 400, 80, 80), new Color(123, 50, 255, 255));
             t.SetSprite("res/example.png");
             entityManager.AddEntity(t);
         }

@@ -1,4 +1,6 @@
 ﻿using Raylib_cs;
+using System;
+using System.IO;
 
 namespace Game
 {
@@ -10,6 +12,9 @@ namespace Game
 
             g.Init();
             g.Run();
+
+            string path = Directory.GetCurrentDirectory();
+            Console.WriteLine(path);
         }
     }
 }
