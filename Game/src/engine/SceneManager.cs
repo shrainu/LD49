@@ -11,7 +11,7 @@ namespace Game {
 
         /*
         * -----------------------------------------------------------------------##
-        * New scenes has to be added in acording to their sceneId
+        * New scenes have to be added in acording to their sceneId
         * because scene manager only updates the CurrentScene and its an integer,
         * so if you don't add the lists acording to their sceneID you migth update
         * and render a wrong scene.
