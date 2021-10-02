@@ -22,10 +22,10 @@ void main()
 
     // NOTE: Implement here your fragment shader code
     if (texelColor == vec4(1.0f, 0.0f, 0.0f, 1.0f)) {
-        finalColor = u_ColorR * colDiffuse;
+        finalColor = u_ColorR;
     }
     else if (texelColor == vec4(0.0f, 1.0f, 0.0f, 1.0f)) {
-        finalColor = u_ColorG * colDiffuse;
+        finalColor = u_ColorG;
     }
     else {
         discard;

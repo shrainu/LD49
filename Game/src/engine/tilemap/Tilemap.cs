@@ -1,3 +1,4 @@
+using System;
 using Raylib_cs;
 
 namespace Game {
@@ -62,7 +63,7 @@ namespace Game {
 
 
         public void ActTileTurns() {
-
+            Console.WriteLine("Called");
             for (int x = 0; x < width; x++) {
 
                 for (int y = 0; y < height; y++) {

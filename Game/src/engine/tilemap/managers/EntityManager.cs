@@ -31,6 +31,13 @@ namespace Game {
         }
 
 
+        public void ActEntityTurns() {
+            for (int i = 0; i < entities.Count; i++) {
+                if (entities[i].active) entities[i].ActTurn();
+            }
+        }
+
+
         public void AddEntity(Entity entity) {
 
             entities.Add(entity);

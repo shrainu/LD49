@@ -21,7 +21,7 @@ namespace Game {
 
             // Initialize the window
             Raylib.InitWindow(displayWidth, displayHeight, gameTitle);
-
+            
             // Initialize Scene Manager
             sceneManager = new SceneManager();
 
@@ -61,7 +61,9 @@ namespace Game {
 
             // Render the Current Scene
             sceneManager.Render();
-            
+
+            // Draw the Fps
+            Raylib.DrawFPS(760, 0);
             // Finish the render process
             Raylib.EndDrawing();
         }
