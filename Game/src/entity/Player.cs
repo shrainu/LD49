@@ -7,18 +7,26 @@ namespace Game {
 
         // Properties
 
-        public Player(Transform transform) : base(transform, EntityTag.PLAYER, "Player") {
+        // References
+        TurnManager tm;
 
+
+        public Player(Transform transform, TurnManager tm) : base(transform, EntityTag.PLAYER, "Player") {
+
+            // Load base sprites
             SetSprite("res/example.png");
+
+            // Initialize properties
+            this.tm = tm;
         }
 
 
         public override void Events() {
             
+            GetInput();   
         }
         public override void Update() {
             
-            GetMovementInput();
         }
         public override void Render() {
             
@@ -30,22 +38,31 @@ namespace Game {
             RGBShader.Instance.Unbind();
         }
 
-
         // Private Functions
-        private void GetMovementInput() {
+        private void GetInput() {
 
             if (Raylib.IsKeyDown(KeyboardKey.KEY_A)) {
-                transform.position.x -= 30;
+                Move(-30, 0);
             }
             if (Raylib.IsKeyDown(KeyboardKey.KEY_D)) {
-                transform.position.x += 30;
+                Move(30, 0);
             }
             if (Raylib.IsKeyDown(KeyboardKey.KEY_W)) {
-                transform.position.y -= 30;
+                Move(0, -30);
             }
             if (Raylib.IsKeyDown(KeyboardKey.KEY_S)) {
-                transform.position.y += 30;               
+                Move(0, 30);
             }
+            if (Raylib.IsKeyDown(KeyboardKey.KEY_SPACE)) {
+                
+                tm.ActEnemyTurns();
+            }
+        }
+
+        private void Move(int x, int y ) {
+            transform.position.x += x;
+            transform.position.y += y;
+            tm.ActEnemyTurns();
         }
     }
 }
