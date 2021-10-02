@@ -1,0 +1,28 @@
+
+namespace Game {
+
+    class Transform {
+
+        // Properties
+        public Vector2 position;
+        public Vector2 size;
+        public float rotation;
+
+        public Transform(Vector2 position, Vector2 size) {
+
+            this.position = position;
+            this.size = size;
+            rotation = 0.0f;
+        }
+        public Transform(float x, float y, float width, float height) {
+
+            this.position = new Vector2(x, y);
+            this.size = new Vector2(width, height);
+            rotation = 0.0f;
+        }
+
+        public override string ToString() {
+            return "[ Position : " + position.ToString() + ", Size : " + size.ToString() + " ]";
+        }
+    }
+}

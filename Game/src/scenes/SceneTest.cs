@@ -1,3 +1,4 @@
+using System;
 using Raylib_cs;
 
 namespace Game {
@@ -13,7 +14,7 @@ namespace Game {
 
         }
         public override void Update() {
-
+            
         }
         public override void Render() {
 
