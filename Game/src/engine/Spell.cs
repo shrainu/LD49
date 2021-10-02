@@ -6,10 +6,19 @@ using System.Threading.Tasks;
 
 namespace Game
 {
+    public enum SpellTag
+    {
+        ACTIVE,
+        PASSIVE
+    }
+
     public abstract class Spell
     {
+        public SpellTag Tag { private set; get; }
+
         protected Genes genes;
         protected Unit owner;
+        protected int range;
 
         public double this[int i]
         {
@@ -19,13 +28,15 @@ namespace Game
 
         public Spell(Genes genes) {
             this.genes = genes;
+            Tag = SpellTag.ACTIVE;
         }
 
-        public void Use(int x, int y)
+        public void Use(Tilemap tilemap, int x, int y)
         {
-            Influence(UseGeneral(x, y));
+            if ((x ^ 2 + y ^ 2) < (range ^ 2))
+                Influence(UseGeneral(tilemap, x, y));
         }
         protected abstract void Influence(Unit influensing);
-        protected abstract Unit UseGeneral(int x, int y);
+        protected abstract Unit UseGeneral(Tilemap tilemap, int x, int y);
     }
 }
