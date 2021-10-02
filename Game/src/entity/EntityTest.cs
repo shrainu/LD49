@@ -22,7 +22,7 @@ namespace Game {
         }
         public override void Render() {
 
-            Raylib.DrawRectangle((int)transform.position.x, (int)transform.position.y, (int)transform.size.x, (int)transform.size.y, color);
+            Raylib.DrawTexture(sprite, (int)transform.position.x, (int)transform.position.y, Color.WHITE);
         }
     }
 }
