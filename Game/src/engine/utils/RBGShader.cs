@@ -24,6 +24,9 @@ namespace Game {
 
             shader = Raylib.LoadShader("glsl/color_change/vertex_shader.glsl", "glsl/color_change/fragment_shader.glsl");
         }
+        ~RGBShader() {
+            Raylib.UnloadShader(shader);
+        }
 
         public void Bind() { Raylib.BeginShaderMode(shader); }
         public void Unbind() { Raylib.EndShaderMode(); }
@@ -47,7 +50,7 @@ namespace Game {
 
             float[] colorBuffer = new float[4] { color.r / 255.0f, color.g / 255.0f, color.b / 255.0f, color.a / 255.0f };
 
-            Utils.SetShaderValue(shader, uniformLoc, colorBuffer, ShaderUniformDataType.SHADER_UNIFORM_VEC4);
+            Utils.SetShaderValue<float[]>(shader, uniformLoc, colorBuffer, ShaderUniformDataType.SHADER_UNIFORM_VEC4);
         }
     }
 }

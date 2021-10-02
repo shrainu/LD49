@@ -27,6 +27,7 @@ namespace Game {
         }
         public override void Update() {
             
+            transform.rotation += 0.05f;
         }
         public override void Render() {
             
@@ -34,7 +35,7 @@ namespace Game {
             RGBShader.Instance.SetColorG(Color.PURPLE);
 
             RGBShader.Instance.Bind();
-            Raylib.DrawTexture(sprite, (int)transform.position.x, (int)transform.position.y, Color.WHITE);
+            Raylib.DrawTextureEx(sprite, transform.position.ToNumerics(), transform.rotation, transform.scale, Color.WHITE);
             RGBShader.Instance.Unbind();
         }
 
