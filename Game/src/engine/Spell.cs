@@ -8,7 +8,7 @@ namespace Game
 {
     public abstract class Spell
     {
-        Genes genes;
+        protected Genes genes;
         public double this[int i]
         {
             get { return genes[i]; }
