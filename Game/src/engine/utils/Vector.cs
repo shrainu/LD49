@@ -24,6 +24,9 @@ namespace Game {
         public override string ToString() {
             return "( " + x + ", " + y + " )";
         }
+        public System.Numerics.Vector2 ToNumerics() {
+            return new System.Numerics.Vector2(x, y);
+        }
     }
 
     public class Vector3
@@ -47,6 +50,9 @@ namespace Game {
 
         public override string ToString() {
             return "( " + x + ", " + y + ", " + z + " )";
+        }
+          public System.Numerics.Vector3 ToNumerics() {
+            return new System.Numerics.Vector3(x, y, z);
         }
     }
 }

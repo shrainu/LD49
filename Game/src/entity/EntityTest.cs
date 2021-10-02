@@ -26,7 +26,8 @@ namespace Game {
             RGBShader.Instance.SetColorG(new Color(0, 255, 255, 255));
 
             RGBShader.Instance.Bind();
-            Raylib.DrawTexture(sprite, (int)transform.position.x, (int)transform.position.y, Color.WHITE);
+            Raylib.DrawTextureEx(sprite, transform.position.ToNumerics(), 0, transform.size.x, Color.BLACK);
+          //  Raylib.DrawTexture(sprite, (int)transform.position.x, (int)transform.position.y, Color.WHITE);
             RGBShader.Instance.Unbind();
         }
     }
