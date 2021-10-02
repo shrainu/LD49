@@ -9,6 +9,8 @@ namespace Game
     public abstract class Spell
     {
         protected Genes genes;
+        protected Unit owner;
+
         public double this[int i]
         {
             get { return genes[i]; }
