@@ -14,6 +14,9 @@ namespace Game {
         // Tilemap
         Tilemap tilemap;
 
+        // Camera
+        Camera2D camera2D;
+
         public SceneTest(SceneID sceneId) : base(sceneId) {
 
             // Initialize Tilemap
@@ -24,6 +27,8 @@ namespace Game {
 
             // Initialize Turn Manager
             turnManager = new TurnManager(tilemap, entityManager);
+
+            camera2D = new Camera2D(new Vector2(0, 0).ToNumerics(), new Vector2(0, 0).ToNumerics(), 0.0f, 1.0f) ;
 
             // Create and add entities to the Entity Manager
             EntityTest t = new EntityTest(new Transform(400, 400, 40, 40), new Color(123, 50, 255, 255));
@@ -52,11 +57,17 @@ namespace Game {
             // Clean Background
             Raylib.ClearBackground(Color.BLACK);
 
+            Raylib.BeginMode2D(camera2D);
+            RGBShader.Instance.Bind();
+            
             // Render Tilemap
             tilemap.Render();
 
             // Render Entities
             entityManager.Render();
+
+            RGBShader.Instance.Unbind();
+            Raylib.EndMode2D();
         }
     }
 }

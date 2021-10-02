@@ -19,30 +19,33 @@ namespace Game {
 
         // Properties
         private Shader shader;
+        private int uniformLocationR;
+        private int uniformLocationG;
     
+
         public RGBShader() {
 
             shader = Raylib.LoadShader("glsl/color_change/vertex_shader.glsl", "glsl/color_change/fragment_shader.glsl");
+
+            uniformLocationR = Raylib.GetShaderLocation(shader, "u_ColorR");
+            uniformLocationG = Raylib.GetShaderLocation(shader, "u_ColorG");
         }
         ~RGBShader() {
             Raylib.UnloadShader(shader);
         }
+
 
         public void Bind() { Raylib.BeginShaderMode(shader); }
         public void Unbind() { Raylib.EndShaderMode(); }
 
 
         public void SetColorR(Color color) {
-
-            int uniformLoc = Raylib.GetShaderLocation(shader, "u_ColorR");
-
-            SendUniformColorData(uniformLoc, color);
+            
+            SendUniformColorData(uniformLocationR, color);
         }
         public void SetColorG(Color color) {
 
-            int uniformLoc = Raylib.GetShaderLocation(shader, "u_ColorG");
-
-            SendUniformColorData(uniformLoc, color);
+            SendUniformColorData(uniformLocationG, color);
         }
 
 

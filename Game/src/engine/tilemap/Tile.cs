@@ -24,10 +24,8 @@ namespace Game {
             RGBShader.Instance.SetColorR(Color.GREEN);
             RGBShader.Instance.SetColorG(new Color(75, 75, 75, 255));
         
-            RGBShader.Instance.Bind();
             Raylib.DrawTextureRec(tileset, new Raylib_cs.Rectangle(32, 0, tileSize, tileSize), 
                                 new System.Numerics.Vector2(position.x * tileSize, position.y * tileSize), Color.WHITE);
-            RGBShader.Instance.Unbind();
         }
 
         public virtual void ActTurn() {}

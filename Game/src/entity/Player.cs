@@ -33,10 +33,8 @@ namespace Game {
             
             RGBShader.Instance.SetColorR(Color.GRAY);
             RGBShader.Instance.SetColorG(Color.PURPLE);
-
-            RGBShader.Instance.Bind();
+            
             Raylib.DrawTextureEx(sprite, transform.position.ToNumerics(), transform.rotation, transform.scale, Color.WHITE);
-            RGBShader.Instance.Unbind();
         }
 
         // Private Functions
