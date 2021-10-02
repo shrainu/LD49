@@ -13,7 +13,7 @@ namespace Game {
             entityManager = new EntityManager();
 
             EntityTest t = new EntityTest(new Transform(100, 100, 50, 50), new Color(255, 0, 0, 255));
-            t.SetSprite("res/unknown.png");
+            t.SetSprite("res/example.png");
 
             entityManager.AddEntity(t);
         }
