@@ -5,17 +5,28 @@ namespace Game {
     public class Game {
 
         //Properties
+        public static readonly string gameTitle  = "Ludum Dare #49";
+        public static readonly int displayWidth  = 800;
+        public static readonly int displayHeight = 480;
 
+        // Scene Manager
+        SceneManager sceneManager;
 
-        public Game() {
-
-        }
+        // Constructor / Destructor
+        public Game() {}
+        ~Game() {}
 
 
         public void Init(){
 
             // Initialize the window
-            Raylib.InitWindow(800, 480, "Ludum Dare #49");
+            Raylib.InitWindow(displayWidth, displayHeight, gameTitle);
+
+            // Initialize Scene Manager
+            sceneManager = new SceneManager();
+
+            // Create and a new Scene
+            sceneManager.AddScene(new SceneTest(SceneID.MAIN));
         }
         public void Run() {
 
@@ -33,9 +44,13 @@ namespace Game {
 
         public void Events() {
 
+            // Call the event loop of the Current Scene
+            sceneManager.Events();
         }
         public void Update() {
 
+            // Update the Current Scene
+            sceneManager.Update();
         }
         public void Render() {
 
@@ -44,8 +59,10 @@ namespace Game {
             // Game's default Clear call - This will be overritten by the Scenes
             Raylib.ClearBackground(Color.WHITE);
 
-            // TODO: Add Scene Manager's render loop here
-            Raylib.DrawText("Its working!", 12, 12, 20, Color.BLACK);
+            // Render the Current Scene
+            sceneManager.Render();
+
+            Raylib.DrawText("Its working!", 12, 12, 20, Color.GREEN);
             
             // Finish the render process
             Raylib.EndDrawing();
