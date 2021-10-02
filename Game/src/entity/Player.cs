@@ -22,7 +22,7 @@ namespace Game {
 
 
         public override void Events() {
-            
+
             GetInput();   
         }
         public override void Update() {
@@ -55,14 +55,14 @@ namespace Game {
             }
             if (Raylib.IsKeyDown(KeyboardKey.KEY_SPACE)) {
                 
-                tm.ActEnemyTurns();
+                tm.EndTurn();
             }
         }
 
         private void Move(int x, int y ) {
             transform.position.x += x;
             transform.position.y += y;
-            tm.ActEnemyTurns();
+            tm.EndTurn();
         }
     }
 }
