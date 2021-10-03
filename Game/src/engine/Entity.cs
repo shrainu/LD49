@@ -20,6 +20,13 @@ namespace Game {
 
         // Texture
         public Texture2D sprite;
+        
+        protected List<Perk> perks = new();
+        public Perk this[int i]
+        {
+            get { return perks[i]; }
+            set { perks[i] = value; }
+        }
 
         public Entity(Transform transform, EntityTag tag, string name = "Entity") {
             this.name = name;
