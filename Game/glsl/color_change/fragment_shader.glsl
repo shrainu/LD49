@@ -15,8 +15,8 @@ out vec4 finalColor;
 uniform vec4 u_ColorR;
 uniform vec4 u_ColorG;
 
-void main()
-{
+void main() {
+    
     // Texel color fetching from texture sampler
     vec4 texelColor = texture(texture0, fragTexCoord);
 

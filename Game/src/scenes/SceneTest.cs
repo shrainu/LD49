@@ -31,9 +31,6 @@ namespace Game {
             camera2D = new Camera2D(new Vector2(0, 0).ToNumerics(), new Vector2(0, 0).ToNumerics(), 0.0f, 1.0f) ;
 
             // Create and add entities to the Entity Manager
-            EntityTest t = new EntityTest(new Transform(400, 400, 40, 40), new Color(123, 50, 255, 255));
-            t.SetSprite("res/example.png");
-            entityManager.AddEntity(t);
             Player p = new Player(new Transform(0, 0, 80, 80), turnManager);
             entityManager.AddEntity(p);
         }
@@ -56,9 +53,9 @@ namespace Game {
 
             // Clean Background
             Raylib.ClearBackground(Color.BLACK);
-
-            Raylib.BeginMode2D(camera2D);
+            // Use the RGB shader and begin 2D Mode
             RGBShader.Instance.Bind();
+            Raylib.BeginMode2D(camera2D);
             
             // Render Tilemap
             tilemap.Render();
@@ -66,8 +63,9 @@ namespace Game {
             // Render Entities
             entityManager.Render();
 
-            RGBShader.Instance.Unbind();
+            // Unbind the RGB shader and end 2D Mode
             Raylib.EndMode2D();
+            RGBShader.Instance.Unbind();
         }
     }
 }

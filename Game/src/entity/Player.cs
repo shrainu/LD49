@@ -27,11 +27,11 @@ namespace Game {
         }
         public override void Update() {
             
-            transform.rotation += 1*Utils.deltaTime;
+            transform.rotation += 1 * Utils.deltaTime;
         }
         public override void Render() {
             
-            RGBShader.Instance.SetColorR(Color.GRAY);
+            RGBShader.Instance.SetColorR(Color.DARKGRAY);
             RGBShader.Instance.SetColorG(Color.PURPLE);
             
             Raylib.DrawTextureEx(sprite, transform.position.ToNumerics(), transform.rotation, transform.scale, Color.WHITE);
@@ -41,16 +41,16 @@ namespace Game {
         private void GetInput() {
 
             if (Raylib.IsKeyDown(KeyboardKey.KEY_A)) {
-                Move(-30, 0);
+                Move(-50, 0);
             }
             if (Raylib.IsKeyDown(KeyboardKey.KEY_D)) {
-                Move(30, 0);
+                Move(50, 0);
             }
             if (Raylib.IsKeyDown(KeyboardKey.KEY_W)) {
-                Move(0, -30);
+                Move(0, -50);
             }
             if (Raylib.IsKeyDown(KeyboardKey.KEY_S)) {
-                Move(0, 30);
+                Move(0, 50);
             }
             if (Raylib.IsKeyDown(KeyboardKey.KEY_SPACE)) {
                 
@@ -59,8 +59,8 @@ namespace Game {
         }
 
         private void Move(int x, int y ) {
-            transform.position.x += x*Utils.deltaTime;
-            transform.position.y += y*Utils.deltaTime;
+            transform.position.x += x *Utils.deltaTime;
+            transform.position.y += y *Utils.deltaTime;
             tm.EndTurn();
         }
     }
