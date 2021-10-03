@@ -59,8 +59,8 @@ namespace Game {
         }
 
         private void Move(int x, int y ) {
-            transform.position.x += x *Utils.deltaTime;
-            transform.position.y += y *Utils.deltaTime;
+            transform.position.x += x * Utils.deltaTime;
+            transform.position.y += y * Utils.deltaTime;
             tm.EndTurn();
         }
     }

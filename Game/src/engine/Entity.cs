@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using System.Numerics;
-using System.Collections.Generic;
 using Raylib_cs;
 
 
@@ -23,6 +21,7 @@ namespace Game {
         // Texture
         public Texture2D sprite;
         
+        // Perks
         protected List<Perk> perks = new();
         public Perk this[int i]
         {
