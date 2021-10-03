@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Raylib_cs;
 
 namespace Game
 {
@@ -16,18 +17,18 @@ namespace Game
     {
         public SpellTag Tag { private set; get; }
 
-        protected Gene genes;
+        protected Gene gene;
         protected Unit owner;
         protected int range;
 
         public double this[int i]
         {
-            get { return genes[i]; }
-            set { genes[i] = value; }
+            get { return gene[i]; }
+            set { gene[i] = value; }
         }
 
         public Perk(Gene genes) {
-            this.genes = genes;
+            this.gene = genes;
             Tag = SpellTag.ACTIVE;
         }
 
@@ -41,6 +42,11 @@ namespace Game
         {
             if (RangeCheck(x, y))
                 UseGeneral(tilemap, x, y);
+        }
+
+        public Color GetColor()
+        {
+            return gene.GetColor();
         }
     }
 }
