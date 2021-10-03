@@ -63,7 +63,7 @@ namespace Game {
             sceneManager.Render();
 
             // Draw the Fps
-            Raylib.DrawFPS(760, 0);
+            Raylib.DrawFPS(740, 0);
             // Finish the render process
             Raylib.EndDrawing();
         }

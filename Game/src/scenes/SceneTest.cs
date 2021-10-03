@@ -17,10 +17,14 @@ namespace Game {
         // Camera
         Camera2D camera2D;
 
+        // Player
+        Player player;
+
+
         public SceneTest(SceneID sceneId) : base(sceneId) {
 
             // Initialize Tilemap
-            tilemap = new Tilemap(16, 16, 16, "res/test_tileset.png");
+            tilemap = new Tilemap(16, 16, 16, "res/tileset_back.png", "res/tileset_front.png");
 
             // Initialize Entity Manager
             entityManager = new EntityManager();
@@ -28,11 +32,12 @@ namespace Game {
             // Initialize Turn Manager
             turnManager = new TurnManager(tilemap, entityManager);
 
-            camera2D = new Camera2D(new Vector2(0, 0).ToNumerics(), new Vector2(0, 0).ToNumerics(), 0.0f, 1.0f) ;
+            // Setup Camera
+            camera2D = new Camera2D(new Vector2(400, 240).ToNumerics(), new Vector2(0, 0).ToNumerics(), 0.0f, 5.0f) ;
 
             // Create and add entities to the Entity Manager
-            Player p = new Player(new Transform(0, 0, 80, 80), turnManager);
-            entityManager.AddEntity(p);
+            player = new Player(new Transform(0, 0, 16, 16), turnManager);
+            entityManager.AddEntity(player);
         }
 
 
@@ -46,6 +51,10 @@ namespace Game {
             // Update Tilemap
             tilemap.Update();
 
+            // Update Camera Position
+            camera2D.target = new System.Numerics.Vector2(player.transform.position.x + player.transform.size.x / 2,
+                                                         player.transform.position.y + player.transform.size.y / 2);
+
             // Update Entities
             entityManager.Update();
         }
@@ -53,8 +62,7 @@ namespace Game {
 
             // Clean Background
             Raylib.ClearBackground(Color.BLACK);
-            // Use the RGB shader and begin 2D Mode
-            RGBShader.Instance.Bind();
+            // Begin 2D Mode
             Raylib.BeginMode2D(camera2D);
             
             // Render Tilemap
@@ -63,9 +71,8 @@ namespace Game {
             // Render Entities
             entityManager.Render();
 
-            // Unbind the RGB shader and end 2D Mode
+            // End 2D Mode
             Raylib.EndMode2D();
-            RGBShader.Instance.Unbind();
         }
     }
 }

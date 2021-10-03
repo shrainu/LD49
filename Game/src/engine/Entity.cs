@@ -19,7 +19,7 @@ namespace Game {
         public bool active, render;
 
         // Texture
-        public Texture2D sprite;
+        public Texture2D spriteBack, spriteFront;
         
         // Perks
         protected List<Perk> perks = new();
@@ -43,14 +43,17 @@ namespace Game {
 
         public virtual void ActTurn() {}
 
-        public virtual void SetSprite(string imagePath) {
+        public virtual void SetSprite(string imagePathBack, string imagePathFront) {
 
             // Load Image to the RAM
-            Image temp = Raylib.LoadImage(imagePath);
+            Image tempBack = Raylib.LoadImage(imagePathBack);
+            Image tempFront = Raylib.LoadImage(imagePathFront);
             // Create a texture from Image data which is loaded to VRAM
-            sprite = Raylib.LoadTextureFromImage(temp);
+            spriteBack = Raylib.LoadTextureFromImage(tempBack);
+            spriteFront = Raylib.LoadTextureFromImage(tempFront);
             // Unload the image from RAM
-            Raylib.UnloadImage(temp);
+            Raylib.UnloadImage(tempBack);
+            Raylib.UnloadImage(tempFront);
         }
     }
 }

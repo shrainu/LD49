@@ -14,7 +14,7 @@ namespace Game {
         public Player(Transform transform, TurnManager tm) : base(transform, EntityTag.PLAYER, "Player") {
 
             // Load base sprites
-            SetSprite("res/example.png");
+            SetSprite("res/player_base_back.png", "res/player_base_front.png");
 
             // Initialize properties
             this.tm = tm;
@@ -27,14 +27,11 @@ namespace Game {
         }
         public override void Update() {
             
-            transform.rotation += 1 * Utils.deltaTime;
         }
         public override void Render() {
             
-            RGBShader.Instance.SetColorR(Color.DARKGRAY);
-            RGBShader.Instance.SetColorG(Color.PURPLE);
-            
-            Raylib.DrawTextureEx(sprite, transform.position.ToNumerics(), transform.rotation, transform.scale, Color.WHITE);
+            Raylib.DrawTextureEx(spriteBack, transform.position.ToNumerics(), transform.rotation, transform.scale, Color.PURPLE);
+            Raylib.DrawTextureEx(spriteFront, transform.position.ToNumerics(), transform.rotation, transform.scale, Color.WHITE);
         }
 
         // Private Functions

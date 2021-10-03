@@ -19,11 +19,10 @@ namespace Game {
         public void Update() {
 
         }
-        public void Render(ref Texture2D tileset) {
+        public void Render(Texture2D tilesetBack, Texture2D tilesetFront) {
             
-            RGBShader.Instance.SetColorR(Color.DARKBLUE);
-            RGBShader.Instance.SetColorG(new Color(75, 75, 75, 255));
-            Raylib.DrawTextureRec(tileset, new Raylib_cs.Rectangle(32, 0, tileSize, tileSize), new System.Numerics.Vector2(position.x * tileSize, position.y * tileSize), Color.WHITE);
+            Raylib.DrawTextureRec(tilesetBack, new Raylib_cs.Rectangle(0, 32, tileSize, tileSize), new System.Numerics.Vector2(position.x * tileSize, position.y * tileSize), Color.DARKGRAY);
+            Raylib.DrawTextureRec(tilesetFront, new Raylib_cs.Rectangle(0, 32, tileSize, tileSize), new System.Numerics.Vector2(position.x * tileSize, position.y * tileSize), Color.DARKBLUE);
         }
 
         public virtual void ActTurn() {}

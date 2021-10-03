@@ -10,10 +10,10 @@ namespace Game {
         public Tile[,] tiles;
 
         // Private Properties
-        private Texture2D tileset;
+        private Texture2D tilesetBack, tilesetFront;
 
 
-        public Tilemap(int width, int height, int tileSize, string filepath) {
+        public Tilemap(int width, int height, int tileSize, string filepathBack, string filepathFront) {
 
             this.width = width;
             this.height = height;
@@ -21,7 +21,7 @@ namespace Game {
 
             tiles = new Tile[width, height];
 
-            LoadTileset(filepath);
+            LoadTileset(filepathBack, filepathFront);
 
             // Remove this line in the future to prevent automatic tilecreation
             CreateTiles();
@@ -56,7 +56,7 @@ namespace Game {
 
                 for (int y = 0; y < height; y++) {
 
-                    tiles[x, y].Render(ref tileset);
+                    tiles[x, y].Render(tilesetBack, tilesetFront);
                 }
             }
         }
@@ -74,14 +74,17 @@ namespace Game {
         }
 
 
-        private void LoadTileset(string filepath) {
+        private void LoadTileset(string filepathBack, string filepathFront) {
 
             // Load Image to the RAM
-            Image temp = Raylib.LoadImage(filepath);
+            Image tempBack = Raylib.LoadImage(filepathBack);
+            Image tempFront = Raylib.LoadImage(filepathFront);
             // Create a texture from Image data which is loaded to VRAM
-            tileset = Raylib.LoadTextureFromImage(temp);
+            tilesetBack = Raylib.LoadTextureFromImage(tempBack);
+            tilesetFront = Raylib.LoadTextureFromImage(tempFront);
             // Unload the image from RAM
-            Raylib.UnloadImage(temp);
+            Raylib.UnloadImage(tempBack);
+            Raylib.UnloadImage(tempFront);
         }
     }
 }
