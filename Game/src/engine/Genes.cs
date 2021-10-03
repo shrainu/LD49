@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Runtime; //look! a new library!
-using System.Drawing;
+using Raylib_cs;
 
 namespace Game
 {
@@ -64,7 +64,7 @@ namespace Game
             }
 
             double resultBrightness = VectorFunctions.Length(resultColor);
-            return HSV.ColorFromHSV(VectorFunctions.Degree(resultBrightness, resultColor.x), Saturation, resultBrightness);
+            return RayHSV.ColorFromHSV(VectorFunctions.Degree(resultBrightness, resultColor.x), Saturation, resultBrightness);
         }
 
         public Gene(double[] values)
