@@ -31,12 +31,16 @@ namespace Game
             Tag = SpellTag.ACTIVE;
         }
 
-        public void Use(Tilemap tilemap, int x, int y)
+        bool RangeCheck(int x, int y)
         {
-            if ((x ^ 2 + y ^ 2) < (range ^ 2))
-                UseGeneral(tilemap, x, y);
+            return (x ^ 2 + y ^ 2) < (range ^ 2);
         }
         //protected abstract void Influence(Unit influenced); Replace accordingly
         protected abstract Unit UseGeneral(Tilemap tilemap, int x, int y);
+        public void Use(Tilemap tilemap, int x, int y)
+        {
+            if (RangeCheck(x, y))
+                UseGeneral(tilemap, x, y);
+        }
     }
 }
