@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Game
 {
-    public static class VectorFunctions
+    public partial class Vector
     {
         public static double Length(Vector2 vector)
         {

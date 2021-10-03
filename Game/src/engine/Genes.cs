@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Runtime; //look! a new library!
 using Raylib_cs;
 
 namespace Game
@@ -82,7 +81,7 @@ namespace Game
                 values[i] = _default;
             }
         }
-        public Gene(Random random) //oh no...
+        public Gene(Random random)
         {
             for (int i = 0; i < _default; i++)
             {
