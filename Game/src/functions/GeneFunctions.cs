@@ -50,8 +50,8 @@ namespace Game
                 resultColor += vector;
             }
 
-            double resultBrightness = VectorFunctions.Length(resultColor);
-            return RayHSV.ColorFromHSV(VectorFunctions.Degree(resultBrightness, resultColor.x), Saturation, resultBrightness);
+            double resultBrightness = Vector.Length(resultColor);
+            return RayHSV.ColorFromHSV(Vector.Degree(resultBrightness, resultColor.x), Saturation, resultBrightness);
         }
     }
 }
