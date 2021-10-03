@@ -44,5 +44,12 @@ namespace Game {
             if ((x < 0 || x > width) || (y < 0 || y > height)) return null;
             return nodes[x, y];
         }
+
+        public AStarNode GetNodeByWorldPos(float x, float y) {
+
+            Vector2int gridPos = new Vector2int(((int)x - this.x) / tileSize, ((int)y - this.y) / tileSize);
+            if ((gridPos.x < 0 || gridPos.x > width) || (gridPos.y < 0 || gridPos.y > height)) return null;
+            return nodes[gridPos.x, gridPos.y];
+        }
     }
 }

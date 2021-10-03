@@ -70,5 +70,10 @@ namespace Game {
         public void CalculateFCost() {
             fCost = gCost + hCost;
         }
+
+        public override string ToString()
+        {
+            return "[AStarNode][ x : " + x + ", y : " + y + ", isWalkable : " + isWalkable + "]";
+        }
     }
 }
