@@ -12,11 +12,11 @@ namespace Game
         PASSIVE
     }
 
-    public abstract class Spell
+    public abstract class Perk
     {
         public SpellTag Tag { private set; get; }
 
-        protected Genes genes;
+        protected Gene genes;
         protected Unit owner;
         protected int range;
 
@@ -26,7 +26,7 @@ namespace Game
             set { genes[i] = value; }
         }
 
-        public Spell(Genes genes) {
+        public Perk(Gene genes) {
             this.genes = genes;
             Tag = SpellTag.ACTIVE;
         }
@@ -34,9 +34,9 @@ namespace Game
         public void Use(Tilemap tilemap, int x, int y)
         {
             if ((x ^ 2 + y ^ 2) < (range ^ 2))
-                Influence(UseGeneral(tilemap, x, y));
+                UseGeneral(tilemap, x, y);
         }
-        protected abstract void Influence(Unit influensing);
+        //protected abstract void Influence(Unit influenced); Replace accordingly
         protected abstract Unit UseGeneral(Tilemap tilemap, int x, int y);
     }
 }

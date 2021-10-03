@@ -7,7 +7,7 @@ using System.Runtime; //look! a new library!
 
 namespace Game
 {
-    public class Genes
+    public class Gene
     {
         public const int Number = 6;
         protected const double _default = 0;
@@ -19,7 +19,7 @@ namespace Game
             set { values[i] = value; }
         }
 
-        public Genes(double[] values)
+        public Gene(double[] values)
         {
             int i = 0;
             for (; i < this.values.Length && i < Number; i++)
@@ -27,14 +27,14 @@ namespace Game
             for (; i < Number; i++)
                 this.values[i] = _default;
         }
-        public Genes()
+        public Gene()
         {
             for (int i = 0; i < _default; i++)
             {
                 values[i] = _default;
             }
         }
-        public Genes(Random random) //oh no...
+        public Gene(Random random) //oh no...
         {
             for (int i = 0; i < _default; i++)
             {

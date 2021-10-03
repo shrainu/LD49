@@ -46,6 +46,11 @@ namespace Game
         [return: MarshalAs(UnmanagedType.LPArray, ArraySubType=UnmanagedType.LPStr, SizeConst=512)]
         public static extern string[] GetDroppedFiles(ref int count);
         */
+        public static float deltaTime => GetDeltaTime();
+        public static float GetDeltaTime()
+        {
+            return Raylib.GetFrameTime();
+        }
         public static string[] MarshalDroppedFiles(ref int count)
         {
             string[] droppedFileStrings = new string[count];

@@ -8,11 +8,11 @@ namespace Game
 {
     public abstract class Unit : Entity
     {
-        protected List<Spell> spells = new();
-        public Spell this[int i]
+        protected List<Perk> perks = new();
+        public Perk this[int i]
         {
-            get { return spells[i]; }
-            set { spells[i] = value; }
+            get { return perks[i]; }
+            set { perks[i] = value; }
         }
 
         public Unit(Transform transform, EntityTag tag = EntityTag.ENEMY, string name = "Unit")

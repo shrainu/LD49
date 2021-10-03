@@ -27,7 +27,7 @@ namespace Game {
         }
         public override void Update() {
             
-            transform.rotation += 0.05f;
+            transform.rotation += 1*Utils.deltaTime;
         }
         public override void Render() {
             
@@ -59,8 +59,8 @@ namespace Game {
         }
 
         private void Move(int x, int y ) {
-            transform.position.x += x;
-            transform.position.y += y;
+            transform.position.x += x*Utils.deltaTime;
+            transform.position.y += y*Utils.deltaTime;
             tm.EndTurn();
         }
     }
