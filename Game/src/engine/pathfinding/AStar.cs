@@ -4,6 +4,21 @@ using System.Collections.Generic;
 
 namespace Game {
 
+    /* ------------------------------------------------------------- *
+    * A Star Documentation & How to use it,
+    *
+    * Every scene has to have only one A* object. Having a separate 
+    * A* objects for each Entity or having more than one in a single
+    * scene is redundant.
+    * 
+    * To find path in any object basically call the FindPath function,
+    * A* will return a List<Vector2int> of grid positions that Entity 
+    * needs to move, don't forget that List has the grid positions so
+    * you need to convert them to the world positions before moving the
+    * Entity sprite.
+    *                                                      - Shrain
+    * ------------------------------------------------------------- */
+
     public class AStar {
 
         // Constans
