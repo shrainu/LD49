@@ -1,21 +1,20 @@
 using Raylib_cs;
-using System.Collections.Generic;
-using System;
+
 
 namespace Game {
 
-    public class Player : Unit {
+    public class Player : Entity {
 
         // Properties
 
         // References
         TurnManager tm;
-        AnimationManager animation = AnimationManager.Instance();
+
 
         public Player(Transform transform, TurnManager tm) : base(transform, EntityTag.PLAYER, "Player") {
 
             // Load base sprites
-            SetSprite("res/example.png");
+            SetSprite("res/player_base_back.png", "res/player_base_front.png");
 
             // Initialize properties
             this.tm = tm;
@@ -28,15 +27,11 @@ namespace Game {
         }
         public override void Update() {
             
-            transform.rotation += 1 * Utils.deltaTime;
         }
         public override void Render() {
             
-            RGBShader.Instance.SetColorR(Color.DARKGRAY);
-            RGBShader.Instance.SetColorG(Color.PURPLE);
-            Raylib.DrawText(transform.position.ToString(), 16, 16, 2, Color.WHITE);
-            
-            Raylib.DrawTextureEx(sprite, transform.position.ToNumerics(), transform.rotation, transform.scale, Color.WHITE);
+            Raylib.DrawTextureEx(spriteBack, transform.position.ToNumerics(), transform.rotation, transform.scale, Color.PURPLE);
+            Raylib.DrawTextureEx(spriteFront, transform.position.ToNumerics(), transform.rotation, transform.scale, Color.WHITE);
         }
 
         // Private Functions
@@ -54,20 +49,15 @@ namespace Game {
             if (Raylib.IsKeyDown(KeyboardKey.KEY_S)) {
                 Move(0, 50);
             }
-            if (Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE)) {
-                animation.AddAnimation(new Animation(
-                    new List<Keyframe>{
-                        new Move(1, transform.position, new Vector2(0, 0)) //Reset position
-                    }
-                    , this
-                ));
-              
+            if (Raylib.IsKeyDown(KeyboardKey.KEY_SPACE)) {
+                
+                tm.EndTurn();
             }
         }
 
         private void Move(int x, int y ) {
-            transform.position.x += x *Utils.deltaTime;
-            transform.position.y += y *Utils.deltaTime;
+            transform.position.x += x * Utils.deltaTime;
+            transform.position.y += y * Utils.deltaTime;
             tm.EndTurn();
         }
     }

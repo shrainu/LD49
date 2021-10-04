@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Game {
 
- public abstract class Keyframe
+    public abstract class Keyframe
     {
         public bool Performed(Unit on) { return PerformAction(on); }
         public float time, timer;
@@ -13,11 +13,12 @@ namespace Game {
         public abstract bool PerformAction(Unit body);
     }
     
-public enum Easing // Move from
-{
-    None,
-    Linear
-}
+    public enum Easing // Move from
+    {
+        None,
+        Linear
+    }
+
     public class Move : Keyframe
     {
         private Vector2 from, to;
