@@ -27,8 +27,9 @@ namespace Game {
         public SceneTest(SceneID sceneId) : base(sceneId) {
 
             // Initialize Tilemap
+            int[,] dungeon = DungeonGenerator.GenerateDungeon(40, 40, 12, new Vector2int(4, 4), new Vector2int(8, 8));
             tilemap = new Tilemap(40, 40, 16, "res/tileset_back.png", "res/tileset_front.png");
-            tilemap.GenerateNewMap(12, new Vector2int(4, 4), new Vector2int(8, 8));
+            tilemap.SetData(dungeon);
 
             // Initialize Entity Manager
             entityManager = new EntityManager();
@@ -54,7 +55,8 @@ namespace Game {
             entityManager.Events();
 
             if (Raylib.IsKeyPressed(KeyboardKey.KEY_R)) {
-                tilemap.GenerateNewMap(12, new Vector2int(4, 4), new Vector2int(8, 8));
+                int[,] dungeon = DungeonGenerator.GenerateDungeon(40, 40, 12, new Vector2int(4, 4), new Vector2int(8, 8));
+                tilemap.SetData(dungeon);
             }
         }
         public override void Update() {

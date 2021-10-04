@@ -22,8 +22,8 @@ namespace Game {
     public class AStar {
 
         // Constans
-        private int STRAIGHT_MOVE_COST = 10;
-        private int DIAGONAL_MOVE_COST = 14;
+        private const int STRAIGHT_MOVE_COST = 10;
+        private const int DIAGONAL_MOVE_COST = 14;
 
         // Properties
         public int width, height, tileSize;
@@ -47,22 +47,10 @@ namespace Game {
         }
 
 
-        public void SetData(bool[,] data) {
-
-            grid.SetData(data);
-        }
-
-        public void SetCost(int straight, int diagonal) {
-
-            STRAIGHT_MOVE_COST = straight;
-            DIAGONAL_MOVE_COST = diagonal;
-        }
-
         public List<Vector2int> FindPath(Vector2int startPos, Vector2int endPos) {
             
             AStarNode startNode = grid.GetNodeByGridPos(startPos.x, startPos.y);
             AStarNode endNode = grid.GetNodeByGridPos(endPos.x, endPos.y);
-            Console.WriteLine("Start Node : {0}, End Node : {1}", startNode, endNode);
 
             return TryFindPath(startNode, endNode);
         }
@@ -92,7 +80,6 @@ namespace Game {
             startNode.gCost = 0;
             startNode.hCost = CalculateDistance(startNode, endNode);
             startNode.CalculateFCost();
-            openNodes.Add(startNode);
 
             while (openNodes.Count > 0) {
 
