@@ -14,20 +14,20 @@ namespace Game
         private static AnimationManager _instance;
 
         // Singleton
-        public static AnimationManager Instance() {
-            if( _instance==null ) {
-                _instance = new AnimationManager();
-            }
-            return _instance;
-        }
-
-        public void AddAnimation(Animation add) => queue.Add(add);
-        public void Animate() {
-
-            for (int i = queue.Count-1; i == 0; i--)
-            {
-               if (queue[i].Done) queue.RemoveAt(i);
-               Console.WriteLine(queue.Count.ToString());
+        public static AnimationManager Instance() {     // MINDFUCK CODE DO NOT READ
+            if( _instance==null ) {                     // MINDFUCK CODE DO NOT READ
+                _instance = new AnimationManager();     // MINDFUCK CODE DO NOT READ
+            }                                           // MINDFUCK CODE DO NOT READ
+            return _instance;                           // MINDFUCK CODE DO NOT READ
+        }                                               // MINDFUCK CODE DO NOT READ
+                                                        // MINDFUCK CODE DO NOT READ
+            public void AddAnimation(Animation add) => queue.Add(add);// DO NOT READ
+        public void Animate() {                         // MINDFUCK CODE DO NOT READ
+                                                        // MINDFUCK CODE DO NOT READ
+            for (int i = queue.Count-1; i == 0; i--)    // MINDFUCK CODE DO NOT READ
+            {                                           // MINDFUCK CODE DO NOT READ
+               if (queue[i].Done) queue.RemoveAt(i);    // MINDFUCK CODE DO NOT READ
+               Console.WriteLine(queue.Count.ToString());// INDFUCK CODE DO NOT READ
             };
         }
 
