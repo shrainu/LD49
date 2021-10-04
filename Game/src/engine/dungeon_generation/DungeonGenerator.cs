@@ -105,14 +105,49 @@ namespace Game {
                     if (path == null) Console.WriteLine("Path is null");
 
                     if (path != null) {
-                        for (int j = 0; j < path.Count; j++) 
+                        for (int j = 1; j < path.Count; j++) {
+
+                            // Left and Right walls for corridors that led downwards/upwards
+                            if ((j != path.Count - 1 && j != 0) && path[j].x == path[j - 1].x) {
+                                if (dungeonData[path[j].x + 1, path[j].y] != 0) dungeonData[path[j].x + 1, path[j].y] = 1;
+                                if (dungeonData[path[j].x - 1, path[j].y] != 0) dungeonData[path[j].x - 1, path[j].y] = 1;
+                            }
+                            if ((j != path.Count - 1 && j != 0) && path[j].y == path[j - 1].y) {
+                                if (dungeonData[path[j].x, path[j].y + 1] != 0) dungeonData[path[j].x, path[j].y + 1] = 1;
+                                if (dungeonData[path[j].x, path[j].y - 1] != 0) dungeonData[path[j].x, path[j].y - 1] = 1;
+                            }
+                            if ((j != path.Count - 1 && j != 0) && path[j].x == path[j + 1].x) {
+                                if (dungeonData[path[j].x + 1, path[j].y] != 0) dungeonData[path[j].x + 1, path[j].y] = 1;
+                                if (dungeonData[path[j].x - 1, path[j].y] != 0) dungeonData[path[j].x - 1, path[j].y] = 1;
+                            }
+                            if ((j != path.Count - 1 && j != 0) && path[j].y == path[j + 1].y) {
+                                if (dungeonData[path[j].x, path[j].y + 1] != 0) dungeonData[path[j].x, path[j].y + 1] = 1;
+                                if (dungeonData[path[j].x, path[j].y - 1] != 0) dungeonData[path[j].x, path[j].y - 1] = 1;
+                            }
+
+                            // Corners
+                            if ((j != path.Count - 1 && j != 0) && (path[j].x == path[j - 1].x && path[j].y == path[j + 1].y)) {
+                                if (dungeonData[path[j].x + 1, path[j].y + 1] != 0) dungeonData[path[j].x + 1, path[j].y + 1] = 1;
+                                if (dungeonData[path[j].x + 1, path[j].y - 1] != 0) dungeonData[path[j].x + 1, path[j].y - 1] = 1;
+                                if (dungeonData[path[j].x - 1, path[j].y + 1] != 0) dungeonData[path[j].x - 1, path[j].y + 1] = 1;
+                                if (dungeonData[path[j].x - 1, path[j].y - 1] != 0) dungeonData[path[j].x - 1, path[j].y - 1] = 1;
+                            }
+                            else if ((j != path.Count - 1 && j != 0) && (path[j].y == path[j - 1].y && path[j].x == path[j + 1].x)) {
+                                if (dungeonData[path[j].x + 1, path[j].y + 1] != 0) dungeonData[path[j].x + 1, path[j].y + 1] = 1;
+                                if (dungeonData[path[j].x + 1, path[j].y - 1] != 0) dungeonData[path[j].x + 1, path[j].y - 1] = 1;
+                                if (dungeonData[path[j].x - 1, path[j].y + 1] != 0) dungeonData[path[j].x - 1, path[j].y + 1] = 1;
+                                if (dungeonData[path[j].x - 1, path[j].y - 1] != 0) dungeonData[path[j].x - 1, path[j].y - 1] = 1;
+                            }
+
                             dungeonData[path[j].x, path[j].y] = 0;
+                        }
                     }
                 }
             }
 
             return dungeonData;
         }
+
 
         private static bool CheckRoomCollion(Room r1, Room r2) {
 

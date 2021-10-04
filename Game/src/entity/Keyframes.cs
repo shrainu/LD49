@@ -18,9 +18,9 @@ namespace Game {
     
     public enum Easing // Move from
     {
-        None,   //  ▂▂▂████
-        Linear, //  ▂▃▅▇██
-        Cubic   //  ▂▅▇▇██
+        None,   // ?
+        Linear, // ?
+        Cubic   // ?
     }
 
     public class Move : Keyframe // Basic movement

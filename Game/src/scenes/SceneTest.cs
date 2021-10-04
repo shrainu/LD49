@@ -28,7 +28,7 @@ namespace Game {
 
             // Initialize Tilemap
             tilemap = new Tilemap(40, 40, 16, "res/tileset_back.png", "res/tileset_front.png");
-            tilemap.GenerateNewMap(12, new Vector2int(4, 4), new Vector2int(8, 8));
+            tilemap.GenerateNewMap(12, new Vector2int(8, 8), new Vector2int(12, 12));
 
             // Initialize Entity Manager
             entityManager = new EntityManager();
@@ -40,7 +40,7 @@ namespace Game {
             turnManager = new TurnManager(tilemap, entityManager);
 
             // Setup Camera
-            camera2D = new Camera2D(new Vector2(400, 240).ToNumerics(), new Vector2(0, 0).ToNumerics(), 0.0f, 1f) ;
+            camera2D = new Camera2D(new Vector2(Game.displayWidth / 2, Game.displayHeight / 2).ToNumerics(), new Vector2(0, 0).ToNumerics(), 0.0f, 1f) ;
 
             // Create and add entities to the Entity Manager
             player = new Player(new Transform(0, 0, 16, 16), turnManager);
@@ -54,7 +54,7 @@ namespace Game {
             entityManager.Events();
 
             if (Raylib.IsKeyPressed(KeyboardKey.KEY_R)) {
-                tilemap.GenerateNewMap(12, new Vector2int(4, 4), new Vector2int(8, 8));
+                tilemap.GenerateNewMap(12, new Vector2int(8, 8), new Vector2int(12, 12));
             }
         }
         public override void Update() {

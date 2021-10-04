@@ -27,7 +27,7 @@ namespace Game {
             }
             else if (tileIndex == 1) {
                 Raylib.DrawTextureRec(tilesetBack, new Raylib_cs.Rectangle(0, 0, tileSize, tileSize), new System.Numerics.Vector2(position.x * tileSize, position.y * tileSize), Color.DARKGRAY);
-                Raylib.DrawTextureRec(tilesetFront, new Raylib_cs.Rectangle(0, 0, tileSize, tileSize), new System.Numerics.Vector2(position.x * tileSize, position.y * tileSize), Color.DARKBLUE);
+                Raylib.DrawTextureRec(tilesetFront, new Raylib_cs.Rectangle(0, 0, tileSize, tileSize), new System.Numerics.Vector2(position.x * tileSize, position.y * tileSize), Color.DARKGREEN);
             }
         }
 
