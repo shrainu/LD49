@@ -57,7 +57,7 @@ namespace Game {
             if (Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE)) {
                 animation.AddAnimation(new Animation(
                     new List<Keyframe>{
-                        new Move(8, transform.position, new Vector2(0.1f, 0.1f))
+                        new Move(1, transform.position, new Vector2(0, 0)) //Reset position
                     }
                     , this
                 ));

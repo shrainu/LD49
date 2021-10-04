@@ -41,7 +41,7 @@ namespace Game {
             turnManager = new TurnManager(tilemap, entityManager);
 
             // Setup Camera
-            camera2D = new Camera2D(new Vector2(400, 240).ToNumerics(), new Vector2(0, 0).ToNumerics(), 0.0f, 0.75f) ;
+            camera2D = new Camera2D(new Vector2(400, 240).ToNumerics(), new Vector2(0, 0).ToNumerics(), 0.0f, 1f) ;
 
             // Create and add entities to the Entity Manager
             player = new Player(new Transform(0, 0, 16, 16), turnManager);
@@ -77,12 +77,12 @@ namespace Game {
             Raylib.ClearBackground(Color.BLACK);
             // Begin 2D Mode
             Raylib.BeginMode2D(camera2D);
+
+                        // Animate Entities
+            animationManager.Animate();
             
             // Render Tilemap
             tilemap.Render();
-
-            // Animate Entities
-            animationManager.Animate();
 
             // Render Entities
             entityManager.Render();
