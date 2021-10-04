@@ -1,3 +1,4 @@
+using System;
 
 namespace Game {
 
@@ -20,6 +21,17 @@ namespace Game {
             else { x = position.x; y = position.y; }
 
             CreateNodes();
+        }
+
+
+        public void SetData(bool[,] data) {
+
+            for (int x = 0; x < width; x++) {
+                for (int y = 0; y < height; y++) {
+
+                    nodes[x, y].isWalkable = data[x, y];
+                }
+            }
         }
 
         public void CreateNodes() {

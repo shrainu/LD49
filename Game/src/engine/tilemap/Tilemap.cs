@@ -25,9 +25,9 @@ namespace Game {
         }
 
 
-        public void SetData(int[,] data) {
+        public void GenerateNewMap(int roomCount, Vector2int minRoomSize, Vector2int maxRoomSize) {
 
-            CreateTiles(data);
+            CreateTiles(DungeonGenerator.GenerateDungeon(width, height, roomCount, minRoomSize, maxRoomSize));
         }
 
         public void Update() {
