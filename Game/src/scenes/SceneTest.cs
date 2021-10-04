@@ -11,6 +11,9 @@ namespace Game {
         // Entity Manager
         EntityManager entityManager;
 
+        // Animation Manager
+        AnimationManager animationManager;
+
         // Tilemap
         Tilemap tilemap;
 
@@ -28,6 +31,9 @@ namespace Game {
 
             // Initialize Entity Manager
             entityManager = new EntityManager();
+
+            // Initialize Animation Manager
+            animationManager = AnimationManager.Instance();
 
             // Initialize Turn Manager
             turnManager = new TurnManager(tilemap, entityManager);
@@ -67,6 +73,9 @@ namespace Game {
             
             // Render Tilemap
             tilemap.Render();
+
+            // Animate Entities
+            animationManager.Animate();
 
             // Render Entities
             entityManager.Render();

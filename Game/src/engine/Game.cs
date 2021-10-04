@@ -6,8 +6,8 @@ namespace Game {
 
         //Properties
         public static readonly string gameTitle  = "Ludum Dare #49";
-        public static readonly int displayWidth  = 800;
-        public static readonly int displayHeight = 480;
+        public static readonly int displayWidth  = 1200;
+        public static readonly int displayHeight = 720;
 
         // Scene Manager
         SceneManager sceneManager;

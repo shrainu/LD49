@@ -1,27 +1,25 @@
 using Raylib_cs;
 using System.Collections.Generic;
 
+namespace Game
+{
 
-namespace Game {
-
-    public abstract class Keyframe
+    public class Animation : List<Keyframe>
     {
-        public bool Performed(Entity on) { PerformAction(on); return true;}
 
-        public abstract void PerformAction(Entity body);
-    }
+        public Animation(IEnumerable<Keyframe> frames, Unit host) { this.AddRange(frames); body = host; }
+        private int frame;
+        private Unit body;
 
-    public class Animation : List<Keyframe> {
-
-        public Animation(IEnumerable<Keyframe> frames) => this.AddRange(frames);
-//Entirely synced as it's intended for the combat
-        public bool Play(ref Entity body)
+        public bool Done => Play();
+        private bool Play()
         {
-            foreach(Keyframe key in this)
+            if (this[frame].Performed(body))
             {
-            if(key.Performed(body)) continue;
+                frame++;
+                if (frame == Count) return true;
             }
-            return true;
+            return false;
         }
     }
 }

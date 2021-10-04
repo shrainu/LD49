@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Numerics;
 using Raylib_cs;
 
 
@@ -19,9 +20,8 @@ namespace Game {
         public bool active, render;
 
         // Texture
-        public Texture2D spriteBack, spriteFront;
+        public Texture2D sprite;
         
-        // Perks
         protected List<Perk> perks = new();
         public Perk this[int i]
         {
@@ -43,17 +43,14 @@ namespace Game {
 
         public virtual void ActTurn() {}
 
-        public virtual void SetSprite(string imagePathBack, string imagePathFront) {
+        public virtual void SetSprite(string imagePath) {
 
             // Load Image to the RAM
-            Image tempBack = Raylib.LoadImage(imagePathBack);
-            Image tempFront = Raylib.LoadImage(imagePathFront);
+            Image temp = Raylib.LoadImage(imagePath);
             // Create a texture from Image data which is loaded to VRAM
-            spriteBack = Raylib.LoadTextureFromImage(tempBack);
-            spriteFront = Raylib.LoadTextureFromImage(tempFront);
+            sprite = Raylib.LoadTextureFromImage(temp);
             // Unload the image from RAM
-            Raylib.UnloadImage(tempBack);
-            Raylib.UnloadImage(tempFront);
+            Raylib.UnloadImage(temp);
         }
     }
 }
