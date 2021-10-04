@@ -22,23 +22,13 @@ namespace Game {
             tiles = new Tile[width, height];
 
             LoadTileset(filepathBack, filepathFront);
-
-            // Remove this line in the future to prevent automatic tilecreation
-            CreateTiles();
         }
 
 
-        public void CreateTiles() {
+        public void SetData(int[,] data) {
 
-            for (int x = 0; x < width; x++) {
-
-                for (int y = 0; y < height; y++) {
-
-                    tiles[x, y] = new Tile(new Vector2(x, y), tileSize, 0); // Tile index is set to 0 for now
-                }
-            }
+            CreateTiles(data);
         }
-
 
         public void Update() {
 
@@ -56,11 +46,10 @@ namespace Game {
 
                 for (int y = 0; y < height; y++) {
 
-                    tiles[x, y].Render(tilesetBack, tilesetFront);
+                    if (tiles[x, y].tileIndex != -1) tiles[x, y].Render(tilesetBack, tilesetFront);
                 }
             }
         }
-
 
         public void ActTileTurns() {
             
@@ -73,6 +62,17 @@ namespace Game {
             }
         }
 
+
+        private void CreateTiles(int[,] data) {
+
+            for (int x = 0; x < width; x++) {
+
+                for (int y = 0; y < height; y++) {
+
+                    tiles[x, y] = new Tile(new Vector2(x, y), tileSize, data[x, y]); // Tile index is set to 0 for now
+                }
+            }
+        }
 
         private void LoadTileset(string filepathBack, string filepathFront) {
 
