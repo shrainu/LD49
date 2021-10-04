@@ -24,7 +24,9 @@ namespace Game {
         public SceneTest(SceneID sceneId) : base(sceneId) {
 
             // Initialize Tilemap
-            tilemap = new Tilemap(16, 16, 16, "res/tileset_back.png", "res/tileset_front.png");
+            int[,] dungeon = DungeonGenerator.GenerateDungeon(40, 40, 12, new Vector2int(4, 4), new Vector2int(8, 8));
+            tilemap = new Tilemap(40, 40, 16, "res/tileset_back.png", "res/tileset_front.png");
+            tilemap.SetData(dungeon);
 
             // Initialize Entity Manager
             entityManager = new EntityManager();
@@ -33,7 +35,7 @@ namespace Game {
             turnManager = new TurnManager(tilemap, entityManager);
 
             // Setup Camera
-            camera2D = new Camera2D(new Vector2(400, 240).ToNumerics(), new Vector2(0, 0).ToNumerics(), 0.0f, 5.0f) ;
+            camera2D = new Camera2D(new Vector2(400, 240).ToNumerics(), new Vector2(0, 0).ToNumerics(), 0.0f, 0.75f) ;
 
             // Create and add entities to the Entity Manager
             player = new Player(new Transform(0, 0, 16, 16), turnManager);
@@ -45,6 +47,11 @@ namespace Game {
 
             // Entity Events
             entityManager.Events();
+
+            if (Raylib.IsKeyPressed(KeyboardKey.KEY_R)) {
+                int[,] dungeon = DungeonGenerator.GenerateDungeon(40, 40, 12, new Vector2int(4, 4), new Vector2int(8, 8));
+                tilemap.SetData(dungeon);
+            }
         }
         public override void Update() {
             

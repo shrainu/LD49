@@ -7,7 +7,7 @@ namespace Game {
         // Properties
         Vector2 position;
         int tileSize;
-        int tileIndex;
+        public int tileIndex;
 
         public Tile(Vector2 position, int tileSize, int tileIndex) {
 
