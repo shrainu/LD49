@@ -38,7 +38,6 @@ namespace Game {
 
             // Initialize Tilemap
             tilemap = new Tilemap(dungeonWidth, dungeonHeight, tileSize, aStar, defaultTilesetBack, defaultTilesetFront);
-            tilemap.GenerateNewMap(avarageRoomCount, minRoomSize, maxRoomSize, dungeonMap);
 
             // Object Layer
             objectLayer = new ObjectLayer(dungeonWidth, dungeonHeight, tileSize);
@@ -59,6 +58,9 @@ namespace Game {
             player = new Player(new Transform(0, 0, tileSize, tileSize), turnManager, objectLayer, aStar.GetGrid());
             entityManager.AddEntity(player);
 
+            // Generate a new map, player has to exist at this point
+            tilemap.GenerateNewMap(avarageRoomCount, minRoomSize, maxRoomSize, dungeonMap, player);
+
             // Setup the Dungeon Virtual Map
             dungeonMap.UpdateDungeonData();
             dungeonMap.SetPlayer(player);
@@ -71,7 +73,7 @@ namespace Game {
             entityManager.Events();
 
             if (Raylib.IsKeyPressed(KeyboardKey.KEY_R)) {
-                tilemap.GenerateNewMap(avarageRoomCount, minRoomSize, maxRoomSize, dungeonMap);
+                tilemap.GenerateNewMap(avarageRoomCount, minRoomSize, maxRoomSize, dungeonMap, player);
             }
         }
         public override void Update() {

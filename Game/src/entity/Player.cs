@@ -1,3 +1,4 @@
+using System;
 using Raylib_cs;
 
 
@@ -24,6 +25,13 @@ namespace Game {
             aStarGrid   = ag;
         }
 
+
+        public void SendToStartRoom(Vector2int roomCenter) {
+
+            objectLayer.MoveEntity(this, roomCenter);
+            transform.position.x = MathF.Floor(roomCenter.x * transform.size.x);
+            transform.position.y = MathF.Floor(roomCenter.y * transform.size.y);
+        }
 
         public override void Events() {
 
@@ -62,6 +70,11 @@ namespace Game {
             // Calculate the future position
             Vector2int futurePos = new Vector2int(gridPos.x + action.x, gridPos.y + action.y);
 
+            // Check if player is trying to move out of the map
+            if ((futurePos.x >= objectLayer.width  || futurePos.x < 0) ||
+                (futurePos.y >= objectLayer.height || futurePos.y < 0))
+                return;
+
             // Check if that position is a wall
             bool isWall = aStarGrid.CheckWalkableTile(futurePos.x, futurePos.y);
             if (isWall) return;
@@ -71,6 +84,7 @@ namespace Game {
 
             // If there is no entity move there
             if (e == null) {
+                
                 objectLayer.MoveEntity(this, futurePos);
                 TileMove(action.x, action.y);
             }

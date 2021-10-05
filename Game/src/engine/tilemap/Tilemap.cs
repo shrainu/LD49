@@ -30,9 +30,9 @@ namespace Game {
         }
 
 
-        public void GenerateNewMap(int roomCount, Vector2int minRoomSize, Vector2int maxRoomSize, DungeonMap virtualMap) {
+        public void GenerateNewMap(int roomCount, Vector2int minRoomSize, Vector2int maxRoomSize, DungeonMap virtualMap, Player p) {
 
-            int[,] dungeonData = DungeonGenerator.GenerateDungeon(width, height, roomCount, minRoomSize, maxRoomSize);
+            int[,] dungeonData = DungeonGenerator.GenerateDungeon(width, height, roomCount, minRoomSize, maxRoomSize, p);
             bool[,] aStarData = new bool[width, height];
 
             CreateTiles(dungeonData);
@@ -40,9 +40,9 @@ namespace Game {
             for (int x = 0; x < width; x++) {
                 for (int y = 0; y < height; y++) {
                     if (dungeonData[x,y] != 0)
-                        aStarData[x,y] = false;
-                    else 
                         aStarData[x,y] = true;
+                    else 
+                        aStarData[x,y] = false;
                 }
             }
 

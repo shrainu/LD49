@@ -11,16 +11,21 @@ namespace Game {
 
             public Vector2int position;
             public int width, height;
-            public bool start, end;
+            public bool start, finish;
 
             public Room(Vector2int position, int width, int height) {
                 this.position = position;
                 this.width = width;
                 this.height = height;
 
-                start = false;
-                end   = false;
+                start  = false;
+                finish = false;
             }
+
+            public void SetStart(bool value) { start = value; }
+            public bool GetStart() { return start; }
+            public void SetFinish(bool value) { finish = value; }
+            public bool GetFinish() { return finish; }
         }
 
         // Properties
@@ -32,7 +37,7 @@ namespace Game {
         public static Room[] s_Room;
 
 
-        public static int[,] GenerateDungeon(int width, int height, int roomCount, Vector2int roomSizeMin, Vector2int roomSizeMax) {
+        public static int[,] GenerateDungeon(int width, int height, int roomCount, Vector2int roomSizeMin, Vector2int roomSizeMax, Player p) {
 
             // Setup map to a new 2D array
             s_DungeonData = new int[width, height];
@@ -103,6 +108,25 @@ namespace Game {
                     tempData[x, y] = true;
                 }
             }
+
+            // Set the starting room
+            int startRoomIndex = rnd.Next(0, rooms.Count);
+            int finishRoomIndex;
+            do { finishRoomIndex = rnd.Next(0, rooms.Count);
+            } while(finishRoomIndex != startRoomIndex);
+
+            rooms[startRoomIndex].SetStart(true);
+            rooms[finishRoomIndex].SetFinish(true);
+
+            // Center the player to the startRoom
+            Room tstart = rooms[startRoomIndex];
+            p.SendToStartRoom(new Vector2int((int)MathF.Floor(tstart.position.x + tstart.width  / 2.0f),
+                                             (int)MathF.Floor(tstart.position.y + tstart.height / 2.0f)));
+
+            // Copy all the rooms to the rooms array
+            s_Room = new Room[rooms.Count];
+            for (int i = 0; i < rooms.Count; i++)
+                s_Room[i] = rooms[i];
 
             // Create a temporary A* to connect rooms
             AStar tempAStar = new AStar(width, height, 16);
