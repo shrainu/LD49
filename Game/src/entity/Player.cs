@@ -70,16 +70,20 @@ namespace Game {
             Entity e = objectLayer.GetEntity(futurePos.x, futurePos.y);
 
             // If there is no entity move there
-            if (e == null)
+            if (e == null) {
                 objectLayer.MoveEntity(this, futurePos);
-            else
+                TileMove(action.x, action.y);
+            }
+            else {
                 return; // TODO : Attack that entity here
+            }
+
+            turnManager.EndTurn();
         }
 
         private void TileMove(int x, int y ) {
             transform.position.x += x * 16;
             transform.position.y += y * 16;
-            turnManager.EndTurn();
         }
     }
 }
