@@ -22,13 +22,12 @@ namespace Game {
             return entityArray[x, y];
         }
 
-        public void MoveEntity(Entity entity, Vector2int positionDifference) {
+        public void MoveEntity(Entity entity, Vector2int futurePos) {
 
             Vector2int currentPos = GetGridPos(entity.transform.position);
-            Vector2int newPosition = new Vector2int(currentPos.x + positionDifference.x, currentPos.y + positionDifference.y);
 
-            entityArray[currentPos.x, currentPos.y]   = null;
-            entityArray[newPosition.x, newPosition.y] = entity;
+            entityArray[currentPos.x, currentPos.y] = null;
+            entityArray[futurePos.x, futurePos.y]   = entity;
         }
 
         public Vector2int GetGridPos(Vector2 position) {

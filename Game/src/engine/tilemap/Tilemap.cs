@@ -12,8 +12,11 @@ namespace Game {
         // Private Properties
         private Texture2D tilesetBack, tilesetFront;
 
+        // References
+        private AStar aStar;
 
-        public Tilemap(int width, int height, int tileSize, string filepathBack, string filepathFront) {
+
+        public Tilemap(int width, int height, int tileSize, AStar aStar, string filepathBack, string filepathFront) {
 
             this.width = width;
             this.height = height;
@@ -21,13 +24,29 @@ namespace Game {
 
             tiles = new Tile[width, height];
 
+            this.aStar = aStar;
+
             LoadTileset(filepathBack, filepathFront);
         }
 
 
         public void GenerateNewMap(int roomCount, Vector2int minRoomSize, Vector2int maxRoomSize) {
 
-            CreateTiles(DungeonGenerator.GenerateDungeon(width, height, roomCount, minRoomSize, maxRoomSize));
+            int[,] dungeonData = DungeonGenerator.GenerateDungeon(width, height, roomCount, minRoomSize, maxRoomSize);
+            bool[,] aStarData = new bool[width, height];
+
+            CreateTiles(dungeonData);
+
+            for (int x = 0; x < width; x++) {
+                for (int y = 0; y < height; y++) {
+                    if (dungeonData[x,y] != 0)
+                        aStarData[x,y] = false;
+                    else 
+                        aStarData[x,y] = true;
+                }
+            }
+
+            aStar.SetData(aStarData);
         }
 
         public void Update() {

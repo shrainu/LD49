@@ -29,12 +29,12 @@ namespace Game {
 
         public SceneDungeon() : base(SceneID.GAME) {
 
-            // Initialize Tilemap
-            tilemap = new Tilemap(dungeonWidth, dungeonHeight, tileSize, defaultTilesetBack, defaultTilesetFront);
-            tilemap.GenerateNewMap(avarageRoomCount, minRoomSize, maxRoomSize);
-
             // AStar
             aStar = new AStar(dungeonWidth, dungeonHeight, tileSize);
+
+            // Initialize Tilemap
+            tilemap = new Tilemap(dungeonWidth, dungeonHeight, tileSize, aStar, defaultTilesetBack, defaultTilesetFront);
+            tilemap.GenerateNewMap(avarageRoomCount, minRoomSize, maxRoomSize);
 
             // Object Layer
             objectLayer = new ObjectLayer(dungeonWidth, dungeonHeight, tileSize);
@@ -77,10 +77,6 @@ namespace Game {
 
             // Update Entities
             entityManager.Update();
-
-            // Test
-            Vector2int t = objectLayer.GetGridPos(player.transform.position);
-            Console.WriteLine("Player position in grid : {0}, {1}", t.x, t.y);
         }
         public override void Render() {
 
