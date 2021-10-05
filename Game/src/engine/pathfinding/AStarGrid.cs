@@ -52,6 +52,11 @@ namespace Game {
             }
         }
 
+        public bool CheckWalkableTile(int x, int y) {
+
+            return nodes[x, y].isWalkable;
+        }
+
         public AStarNode GetNodeByGridPos(int x, int y) {
             if ((x < 0 || x > width) || (y < 0 || y > height)) return null;
             return nodes[x, y];
@@ -59,9 +64,11 @@ namespace Game {
 
         public AStarNode GetNodeByWorldPos(float x, float y) {
 
-            Vector2int gridPos = new Vector2int(((int)x - this.x) / tileSize, ((int)y - this.y) / tileSize);
-            if ((gridPos.x < 0 || gridPos.x > width) || (gridPos.y < 0 || gridPos.y > height)) return null;
-            return nodes[gridPos.x, gridPos.y];
+            int xPos = ((int)x - this.x) / tileSize;
+            int yPos = ((int)y - this.y) / tileSize;
+
+            if ((xPos < 0 || xPos > width) || (yPos < 0 || yPos > height)) return null;
+            return nodes[xPos, yPos];
         }
     }
 }

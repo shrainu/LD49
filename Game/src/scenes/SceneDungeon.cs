@@ -17,6 +17,7 @@ namespace Game {
 
         // System Components
         Camera2D camera2D;
+        ObjectLayer objectLayer;
         TurnManager turnManager;
         EntityManager entityManager;
         AnimationManager animationManager;
@@ -35,6 +36,9 @@ namespace Game {
             // AStar
             aStar = new AStar(dungeonWidth, dungeonHeight, tileSize);
 
+            // Object Layer
+            objectLayer = new ObjectLayer(dungeonWidth, dungeonHeight, tileSize);
+
             // Initialize Entity Manager
             entityManager = new EntityManager();
 
@@ -48,7 +52,7 @@ namespace Game {
             camera2D = new Camera2D(new Vector2(Game.displayWidth / 2, Game.displayHeight / 2).ToNumerics(), new Vector2(0, 0).ToNumerics(), 0.0f, 1f) ;
 
             // Create and add entities to the Entity Manager
-            player = new Player(new Transform(0, 0, tileSize, tileSize), turnManager);
+            player = new Player(new Transform(0, 0, tileSize, tileSize), turnManager, objectLayer, aStar.GetGrid());
             entityManager.AddEntity(player);
         }
 
@@ -73,6 +77,10 @@ namespace Game {
 
             // Update Entities
             entityManager.Update();
+
+            // Test
+            Vector2int t = objectLayer.GetGridPos(player.transform.position);
+            Console.WriteLine("Player position in grid : {0}, {1}", t.x, t.y);
         }
         public override void Render() {
 

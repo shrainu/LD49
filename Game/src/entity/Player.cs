@@ -8,16 +8,20 @@ namespace Game {
         // Properties
 
         // References
-        TurnManager tm;
+        TurnManager turnManager;
+        ObjectLayer objectLayer;
+        AStarGrid   aStarGrid;
 
 
-        public Player(Transform transform, TurnManager tm) : base(transform, EntityTag.PLAYER, "Player") {
+        public Player(Transform transform, TurnManager tm, ObjectLayer ob, AStarGrid ag) : base(transform, EntityTag.PLAYER, "Player") {
 
             // Load base sprites
             SetSprite("res/player_base_back.png", "res/player_base_front.png");
 
-            // Initialize properties
-            this.tm = tm;
+            // Initialize References
+            turnManager = tm;
+            objectLayer = ob;
+            aStarGrid   = ag;
         }
 
 
@@ -37,28 +41,24 @@ namespace Game {
         // Private Functions
         private void GetInput() {
 
-            if (Raylib.IsKeyDown(KeyboardKey.KEY_A)) {
-                Move(-50, 0);
+            if (Raylib.IsKeyPressed(KeyboardKey.KEY_A)) {
+                TileMove(-1, 0);
             }
-            if (Raylib.IsKeyDown(KeyboardKey.KEY_D)) {
-                Move(50, 0);
+            else if (Raylib.IsKeyPressed(KeyboardKey.KEY_D)) {
+                TileMove(+1, 0);
             }
-            if (Raylib.IsKeyDown(KeyboardKey.KEY_W)) {
-                Move(0, -50);
+            if (Raylib.IsKeyPressed(KeyboardKey.KEY_W)) {
+                TileMove(0, -1);
             }
-            if (Raylib.IsKeyDown(KeyboardKey.KEY_S)) {
-                Move(0, 50);
-            }
-            if (Raylib.IsKeyDown(KeyboardKey.KEY_SPACE)) {
-                
-                tm.EndTurn();
+            else if (Raylib.IsKeyPressed(KeyboardKey.KEY_S)) {
+                TileMove(0, +1);
             }
         }
 
-        private void Move(int x, int y ) {
-            transform.position.x += x * Utils.deltaTime;
-            transform.position.y += y * Utils.deltaTime;
-            tm.EndTurn();
+        private void TileMove(int x, int y ) {
+            transform.position.x += x * 16;
+            transform.position.y += y * 16;
+            turnManager.EndTurn();
         }
     }
 }

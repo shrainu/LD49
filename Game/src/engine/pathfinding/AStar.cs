@@ -58,6 +58,10 @@ namespace Game {
             DIAGONAL_MOVE_COST = diagonal;
         }
 
+        public AStarGrid GetGrid() {
+            return grid;
+        }
+
         public List<Vector2int> FindPath(Vector2int startPos, Vector2int endPos) {
             
             AStarNode startNode = grid.GetNodeByGridPos(startPos.x, startPos.y);
