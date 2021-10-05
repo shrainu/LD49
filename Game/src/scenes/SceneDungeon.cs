@@ -3,32 +3,37 @@ using Raylib_cs;
 
 namespace Game {
 
-    public class SceneTest : Scene {
+    public class SceneDungeon : Scene {
 
-        // Turn Manager
-        TurnManager turnManager;
+        // Scene Properties
+        private const int dungeonWidth  = 40;
+        private const int dungeonHeight = 40;
+        private const int avarageRoomCount = 12;
+        private readonly Vector2int minRoomSize = new Vector2int(8, 8);
+        private readonly Vector2int maxRoomSize = new Vector2int(12, 12);
+        private const int tileSize = 16;
+        private const string defaultTilesetBack  = "res/tileset_back.png";
+        private const string defaultTilesetFront = "res/tileset_front.png";
 
-        // Entity Manager
-        EntityManager entityManager;
-
-        // Animation Manager
-        AnimationManager animationManager;
-
-        // Tilemap
-        Tilemap tilemap;
-
-        // Camera
+        // System Components
         Camera2D camera2D;
-
-        // Player
+        TurnManager turnManager;
+        EntityManager entityManager;
+        AnimationManager animationManager;
+        Tilemap tilemap;
+        AStar aStar;
+        // Objects with static storage durations
         Player player;
 
 
-        public SceneTest(SceneID sceneId) : base(sceneId) {
+        public SceneDungeon() : base(SceneID.GAME) {
 
             // Initialize Tilemap
-            tilemap = new Tilemap(40, 40, 16, "res/tileset_back.png", "res/tileset_front.png");
-            tilemap.GenerateNewMap(12, new Vector2int(8, 8), new Vector2int(12, 12));
+            tilemap = new Tilemap(dungeonWidth, dungeonHeight, tileSize, defaultTilesetBack, defaultTilesetFront);
+            tilemap.GenerateNewMap(avarageRoomCount, minRoomSize, maxRoomSize);
+
+            // AStar
+            aStar = new AStar(dungeonWidth, dungeonHeight, tileSize);
 
             // Initialize Entity Manager
             entityManager = new EntityManager();
@@ -43,7 +48,7 @@ namespace Game {
             camera2D = new Camera2D(new Vector2(Game.displayWidth / 2, Game.displayHeight / 2).ToNumerics(), new Vector2(0, 0).ToNumerics(), 0.0f, 1f) ;
 
             // Create and add entities to the Entity Manager
-            player = new Player(new Transform(0, 0, 16, 16), turnManager);
+            player = new Player(new Transform(0, 0, tileSize, tileSize), turnManager);
             entityManager.AddEntity(player);
         }
 
@@ -54,7 +59,7 @@ namespace Game {
             entityManager.Events();
 
             if (Raylib.IsKeyPressed(KeyboardKey.KEY_R)) {
-                tilemap.GenerateNewMap(12, new Vector2int(8, 8), new Vector2int(12, 12));
+                tilemap.GenerateNewMap(avarageRoomCount, minRoomSize, maxRoomSize);
             }
         }
         public override void Update() {
@@ -76,7 +81,7 @@ namespace Game {
             // Begin 2D Mode
             Raylib.BeginMode2D(camera2D);
 
-                        // Animate Entities
+            // Animate Entities
             animationManager.Animate();
             
             // Render Tilemap

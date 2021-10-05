@@ -44,9 +44,11 @@ namespace Game {
 
         public void ChangeScene(Scene scene) {
 
+            CurrentScene = (int)scene.sceneID;
         }
         public void ChangeScene(SceneID sceneId) {
 
+            CurrentScene = (int)sceneId;
         }
         public void AddScene(Scene scene) {
 

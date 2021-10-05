@@ -26,7 +26,11 @@ namespace Game {
             sceneManager = new SceneManager();
 
             // Create and a new Scene
-            sceneManager.AddScene(new SceneTest(SceneID.MAIN));
+            sceneManager.AddScene(new SceneMainMenu());
+            sceneManager.AddScene(new SceneDungeon());
+
+            // Set current scene to be the Game scene
+            sceneManager.ChangeScene(SceneID.GAME);
         }
         public void Run() {
 
@@ -63,7 +67,7 @@ namespace Game {
             sceneManager.Render();
 
             // Draw the Fps
-            Raylib.DrawFPS(740, 0);
+            Raylib.DrawFPS(0, 0);
             // Finish the render process
             Raylib.EndDrawing();
         }
