@@ -42,16 +42,16 @@ namespace Game {
         private void GetInput() {
 
             if (Raylib.IsKeyPressed(KeyboardKey.KEY_A)) {
-                TileMove(-1, 0);
+                TakeAction(new Vector2int(-1, 0));
             }
             else if (Raylib.IsKeyPressed(KeyboardKey.KEY_D)) {
-                TileMove(+1, 0);
+                TakeAction(new Vector2int(+1, 0));
             }
             if (Raylib.IsKeyPressed(KeyboardKey.KEY_W)) {
-                TileMove(0, -1);
+                TakeAction(new Vector2int(0, -1));
             }
             else if (Raylib.IsKeyPressed(KeyboardKey.KEY_S)) {
-                TileMove(0, +1);
+                TakeAction(new Vector2int(0, +1));
             }
         }
 

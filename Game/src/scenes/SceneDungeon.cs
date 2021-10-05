@@ -18,6 +18,7 @@ namespace Game {
         // System Components
         Camera2D camera2D;
         ObjectLayer objectLayer;
+        DungeonMap dungeonMap;
         TurnManager turnManager;
         EntityManager entityManager;
         AnimationManager animationManager;
@@ -29,12 +30,15 @@ namespace Game {
 
         public SceneDungeon() : base(SceneID.GAME) {
 
+            // Initialize the Dungeon Virtual Map
+            dungeonMap = new DungeonMap(dungeonWidth, dungeonHeight, 5);
+
             // AStar
             aStar = new AStar(dungeonWidth, dungeonHeight, tileSize);
 
             // Initialize Tilemap
             tilemap = new Tilemap(dungeonWidth, dungeonHeight, tileSize, aStar, defaultTilesetBack, defaultTilesetFront);
-            tilemap.GenerateNewMap(avarageRoomCount, minRoomSize, maxRoomSize);
+            tilemap.GenerateNewMap(avarageRoomCount, minRoomSize, maxRoomSize, dungeonMap);
 
             // Object Layer
             objectLayer = new ObjectLayer(dungeonWidth, dungeonHeight, tileSize);
@@ -54,6 +58,10 @@ namespace Game {
             // Create and add entities to the Entity Manager
             player = new Player(new Transform(0, 0, tileSize, tileSize), turnManager, objectLayer, aStar.GetGrid());
             entityManager.AddEntity(player);
+
+            // Setup the Dungeon Virtual Map
+            dungeonMap.UpdateDungeonData();
+            dungeonMap.SetPlayer(player);
         }
 
 
@@ -63,7 +71,7 @@ namespace Game {
             entityManager.Events();
 
             if (Raylib.IsKeyPressed(KeyboardKey.KEY_R)) {
-                tilemap.GenerateNewMap(avarageRoomCount, minRoomSize, maxRoomSize);
+                tilemap.GenerateNewMap(avarageRoomCount, minRoomSize, maxRoomSize, dungeonMap);
             }
         }
         public override void Update() {
@@ -93,6 +101,9 @@ namespace Game {
 
             // Render Entities
             entityManager.Render();
+
+            // Render the Virtual Map
+            dungeonMap.Render(objectLayer, camera2D);
 
             // End 2D Mode
             Raylib.EndMode2D();

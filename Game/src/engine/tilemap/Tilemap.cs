@@ -30,7 +30,7 @@ namespace Game {
         }
 
 
-        public void GenerateNewMap(int roomCount, Vector2int minRoomSize, Vector2int maxRoomSize) {
+        public void GenerateNewMap(int roomCount, Vector2int minRoomSize, Vector2int maxRoomSize, DungeonMap virtualMap) {
 
             int[,] dungeonData = DungeonGenerator.GenerateDungeon(width, height, roomCount, minRoomSize, maxRoomSize);
             bool[,] aStarData = new bool[width, height];
@@ -47,6 +47,7 @@ namespace Game {
             }
 
             aStar.SetData(aStarData);
+            virtualMap.UpdateDungeonData();
         }
 
         public void Update() {

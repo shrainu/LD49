@@ -7,15 +7,19 @@ namespace Game {
     public static class DungeonGenerator { 
 
         // Room
-        struct Room {
+        public struct Room {
 
             public Vector2int position;
             public int width, height;
+            public bool start, end;
 
             public Room(Vector2int position, int width, int height) {
                 this.position = position;
                 this.width = width;
                 this.height = height;
+
+                start = false;
+                end   = false;
             }
         }
 
@@ -23,8 +27,15 @@ namespace Game {
         private static Random rnd = new Random();
         private static readonly int maxRetryCount = 50;
 
+        // Virtual Map Properties
+        public static int[,] s_DungeonData;
+        public static Room[] s_Room;
+
 
         public static int[,] GenerateDungeon(int width, int height, int roomCount, Vector2int roomSizeMin, Vector2int roomSizeMax) {
+
+            // Setup map to a new 2D array
+            s_DungeonData = new int[width, height];
 
             int[,] dungeonData = new int[width, height];
             List<Room> rooms = new List<Room>();
@@ -63,6 +74,7 @@ namespace Game {
             for (int x = 0; x < width; x++){
                 for (int y = 0; y < height; y++){
                     dungeonData[x,y] = -1;
+                    s_DungeonData[x,y] = -1;
                 }
             }
 
@@ -73,9 +85,13 @@ namespace Game {
                 for (int x = t.position.x; x < t.position.x + t.width; x++) {
                     for (int y = t.position.y; y < t.position.y + t.height; y++) {
                         
+                        // Setup the data for the tilemap
                         if (x == t.position.x || x == t.position.x + t.width - 1) dungeonData[x, y] = 1;
                         else if (y == t.position.y || y == t.position.y + t.height - 1) dungeonData[x, y] = 1;
                         else dungeonData[x, y] = 0;
+
+                        // Setup the data for the virtual map
+                        s_DungeonData[x, y] = i + 1;
                     }
                 }
             }
@@ -100,7 +116,6 @@ namespace Game {
 
                     Vector2int currentRoomCenter = new Vector2int((int)Math.Floor(rooms[i].position.x + rooms[i].width / 2.0f), (int)Math.Floor(rooms[i].position.y + rooms[i].height / 2.0f));
                     Vector2int nextRoomCenter = new Vector2int((int)Math.Floor(rooms[i + 1].position.x + rooms[i + 1].width / 2.0f), (int)Math.Floor(rooms[i + 1].position.y + rooms[i + 1].height / 2.0f));
-                    Console.WriteLine("Room Center : {0}, N.Room Center : {1}", currentRoomCenter, nextRoomCenter);
                     List<Vector2int> path = tempAStar.FindPath(currentRoomCenter, nextRoomCenter);
                     if (path == null) Console.WriteLine("Path is null");
 
@@ -138,6 +153,10 @@ namespace Game {
                                 if (dungeonData[path[j].x - 1, path[j].y + 1] != 0) dungeonData[path[j].x - 1, path[j].y + 1] = 1;
                                 if (dungeonData[path[j].x - 1, path[j].y - 1] != 0) dungeonData[path[j].x - 1, path[j].y - 1] = 1;
                             }
+
+                            // Virtual Map corridors
+                            if (s_DungeonData[path[j].x, path[j].y] == -1) s_DungeonData[path[j].x, path[j].y] = 0;
+
 
                             dungeonData[path[j].x, path[j].y] = 0;
                         }
