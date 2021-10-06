@@ -10,8 +10,10 @@ namespace Game {
 
         // Data
         public int[,] dungeonData;
+        public int[,] explorationData;
         Player player = null;
         
+
         public DungeonMap(int width, int height, int tileSize, Vector2 position = null) {
             
             this.width  = width;
@@ -20,20 +22,44 @@ namespace Game {
 
             dungeonData = new int[width, height];
 
+            // Set the position
             if (position == null)
                 this.position = new Vector2(Game.displayWidth - (width * tileSize), 0);
             else 
                 this.position = position;
         }
 
+
         public void UpdateDungeonData() {
             dungeonData = DungeonGenerator.s_DungeonData;
+            // Reset the exploration data
+            explorationData = new int[width, height];
         }
 
         public void SetPlayer(Player player) {
             this.player = player;
             this.position.y += (int)player.transform.size.y / 2 + 1;
             this.position.x += (int)player.transform.size.x / 2;
+        }
+
+        public void Update(ObjectLayer obj) {
+
+            // This loop updates the visibility of the map
+            Vector2int playerPos = obj.GetGridPos(player.transform.position);
+
+            for (int x = -2; x <=2; x++) {
+                for (int y = -2; y <= 2; y++) {
+
+                    int newPosX = playerPos.x + x;
+                    int newPosY = playerPos.y + y;
+
+                    if ((newPosX > 0 && newPosX < width) && (newPosY > 0 && newPosY < height)) {
+
+                        if (dungeonData[newPosX, newPosY] != -1)
+                            explorationData[newPosX, newPosY] = 1;
+                    }
+                }
+            }
         }
 
         public void Render(ObjectLayer obj, Camera2D camera) {
@@ -43,7 +69,8 @@ namespace Game {
                                                      (int)camera.offset.Y - (int)player.transform.position.y);
 
             // Draw A BackGround
-            Raylib.DrawRectangle((int)position.x - cameraOffset.x, (int)position.y - cameraOffset.y, (width * tileSize), (width * tileSize), new Color(0, 99, 0, 122));
+            Raylib.DrawRectangle((int)position.x - cameraOffset.x, (int)position.y - cameraOffset.y,
+                                 (width * tileSize), (width * tileSize), new Color(0, 99, 0, 122));
 
             //if (player != null)
             for (int x = 0; x < width; x++) {
@@ -52,13 +79,16 @@ namespace Game {
                     Vector2int pos = new Vector2int(x * tileSize + (int)position.x - cameraOffset.x, 
                                                     y * tileSize + (int)position.y - cameraOffset.y);
 
-                    if (dungeonData[x, y] == 0) {
-                        Raylib.DrawRectangle(pos.x, pos.y, tileSize, tileSize, new Color(0, 191, 0, 159));
-                        Raylib.DrawRectangleLinesEx(new Raylib_cs.Rectangle(pos.x, pos.y, tileSize, tileSize), 1, new Color(0, 211, 0, 179));
-                    }
-                    else if (dungeonData[x, y] > 0) {
-                        Raylib.DrawRectangle(pos.x, pos.y, tileSize, tileSize, new Color(0, 56, 0, 179));
-                        Raylib.DrawRectangleLinesEx(new Raylib_cs.Rectangle(pos.x, pos.y, tileSize, tileSize), 1, new Color(0, 86, 0, 184));
+                    if (explorationData[x, y] == 1) {
+                        
+                        if (dungeonData[x, y] == 0) {
+                            Raylib.DrawRectangle(pos.x, pos.y, tileSize, tileSize, new Color(0, 191, 0, 159));
+                            Raylib.DrawRectangleLinesEx(new Raylib_cs.Rectangle(pos.x, pos.y, tileSize, tileSize), 1, new Color(0, 211, 0, 179));
+                        }
+                        else if (dungeonData[x, y] > 0) {
+                            Raylib.DrawRectangle(pos.x, pos.y, tileSize, tileSize, new Color(0, 56, 0, 179));
+                            Raylib.DrawRectangleLinesEx(new Raylib_cs.Rectangle(pos.x, pos.y, tileSize, tileSize), 1, new Color(0, 86, 0, 184));
+                        }
                     }
                     else {
                         Raylib.DrawRectangleLinesEx(new Raylib_cs.Rectangle(pos.x, pos.y, tileSize, tileSize), 1, new Color(0, 222, 0, 120));
@@ -67,7 +97,8 @@ namespace Game {
             }
 
             // Draw Border
-            Raylib.DrawRectangleLines((int)position.x - cameraOffset.x, (int)position.y - cameraOffset.y, (width * tileSize), (width * tileSize), Color.WHITE);
+            Raylib.DrawRectangleLines((int)position.x - cameraOffset.x, (int)position.y - cameraOffset.y,
+                                      (width * tileSize), (width * tileSize), Color.WHITE);
 
             if (player != null) {
                 Vector2int playerPos = obj.GetGridPos(player.transform.position);

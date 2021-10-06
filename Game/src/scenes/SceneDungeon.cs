@@ -83,10 +83,13 @@ namespace Game {
 
             // Update Camera Position
             camera2D.target = new System.Numerics.Vector2(player.transform.position.x + player.transform.size.x / 2,
-                                                         player.transform.position.y + player.transform.size.y / 2);
+                                                          player.transform.position.y + player.transform.size.y / 2);
 
             // Update Entities
             entityManager.Update();
+
+            // Update Virtual Map
+            dungeonMap.Update(objectLayer);
         }
         public override void Render() {
 
